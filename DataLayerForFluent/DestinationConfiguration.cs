@@ -21,6 +21,14 @@ namespace DataLayerForFluent
         public LodgingConfiguration()
         {
             Property(l => l.Name).IsRequired().HasMaxLength(2000);
+            Property(l => l.MilesFromNearestAirport).HasPrecision(8, 1);
+
         }
     }
+
+
+
+
+
+
 }

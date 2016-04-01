@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using Model;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace DataLayerForFluent
@@ -15,6 +16,9 @@ namespace DataLayerForFluent
         public DbSet<Lodging> Lodgings { get; set; }
         public DbSet<Trip> Trips { get; set; }
         public DbSet<Person> People { get; set; }
+        public DbSet<Restaurant> Restaurants { get; set; }
+        
+        
 
         
 
@@ -22,6 +26,25 @@ namespace DataLayerForFluent
         {
             modelBuilder.Configurations.Add(new DestinationConfiguration());
             modelBuilder.Configurations.Add(new LodgingConfiguration());
+            modelBuilder.Configurations.Add(new PersonConfiguration());
+            modelBuilder.Configurations.Add(new TripConfiguration());
+
+            modelBuilder.Entity<Trip>()
+                .HasKey(t => t.Identifier)
+                .Property(t => t.Identifier)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+            //modelBuilder.Entity<Person>()
+            //    .HasKey(p => p.SocialSecurityNumber);
+            //modelBuilder.Entity<Person>()
+            //    .Property(p => p.SocialSecurityNumber)
+            //    .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            
+            //modelBuilder.Entity<Person>()
+            //    .Property(p => p.RowVersion).IsRowVersion();
+
+
+
 
             //modelBuilder.Entity<Trip>().HasKey(t => t.Identifier);
             //modelBuilder.Entity<Destination>().Property(d => d.Name).IsRequired();

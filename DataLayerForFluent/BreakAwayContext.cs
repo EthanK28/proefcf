@@ -13,16 +13,22 @@ namespace DataLayerForFluent
     {
         public DbSet<Destination> Destinations { get; set; }
         public DbSet<Lodging> Lodgings { get; set; }
+        public DbSet<Trip> Trips { get; set; }
+        public DbSet<Person> People { get; set; }
 
         
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Destination>().Property(d => d.Name).IsRequired();
-            modelBuilder.Entity<Destination>().Property(d => d.Description).HasMaxLength(900);
-            modelBuilder.Entity<Destination>().Property(d => d.Photo).HasColumnType("image");
+            modelBuilder.Configurations.Add(new DestinationConfiguration());
+            modelBuilder.Configurations.Add(new LodgingConfiguration());
 
-            modelBuilder.Entity<Lodging>().Property(l => l.Name).IsRequired().HasMaxLength(500);
+            //modelBuilder.Entity<Trip>().HasKey(t => t.Identifier);
+            //modelBuilder.Entity<Destination>().Property(d => d.Name).IsRequired();
+            //modelBuilder.Entity<Destination>().Property(d => d.Description).HasMaxLength(900);
+            //modelBuilder.Entity<Destination>().Property(d => d.Photo).HasColumnType("image");
+
+            //modelBuilder.Entity<Lodging>().Property(l => l.Name).IsRequired().HasMaxLength(500);
 
         }
     }

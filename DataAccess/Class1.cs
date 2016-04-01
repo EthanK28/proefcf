@@ -13,5 +13,6 @@ namespace DataAccess
     {
         public DbSet<Destination> Destinations { get; set; }
         public DbSet<Lodging> Lodgings { get; set; }
+        public DbSet<Trip> Trips { get; set; }
     }
 }

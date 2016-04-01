@@ -22,5 +22,7 @@ namespace Model
         [Timestamp]
         public byte[] RowVersion { get; set; }
 
+        public List<Activity> Activities { get; set; }
+
     }
 }

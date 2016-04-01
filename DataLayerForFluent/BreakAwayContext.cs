@@ -34,6 +34,15 @@ namespace DataLayerForFluent
                 .Property(t => t.Identifier)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
+            modelBuilder.Entity<InternetSpecial>()
+                .HasRequired(s => s.Accomodation)
+                .WithMany(l => l.InternetSpecials);
+
+            //modelBuilder.Entity<Destination>()
+            //    .HasMany(d => d.Lodgings)
+            //    .WithRequired()
+            //    .HasForeignKey(l => l.LodgingId);
+
             //modelBuilder.Entity<Person>()
             //    .HasKey(p => p.SocialSecurityNumber);
             //modelBuilder.Entity<Person>()

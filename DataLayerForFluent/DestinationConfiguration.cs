@@ -11,6 +11,9 @@ namespace DataLayerForFluent
             Property(d => d.Description).HasMaxLength(2000);
             Property(d => d.Photo).HasColumnType("image");
 
+            //HasMany(d => d.Lodgings)
+            //    .WithRequired(l => l.Destination); 
+
         }
 
      

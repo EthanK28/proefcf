@@ -25,6 +25,8 @@ namespace Model
 
         //[Column(TypeName="image")] 
         public byte[] Photo { get; set; }
+
+        [ForeignKey("LocationId")]
         public List<Lodging> Lodgings { get; set; }
     }
 }

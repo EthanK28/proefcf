@@ -21,6 +21,8 @@ namespace BreakAwayConsole
             InsertPerson();
             UpdateTrip();
             UpdatePerson();
+
+            // DeleteDestinationInMemoryAndDbCascade();
         }
 
         private static void InsertDestination()
@@ -60,7 +62,8 @@ namespace BreakAwayConsole
             {
                 FirstName = "Rowan",
                 LastName = "Miller",
-                SocialSecurityNumber = 123455678
+                SocialSecurityNumber = 123455678,
+                Photo = new PersonPhoto { Photo = new Byte[] { 0 } }
             };
             using (var context = new BreakAwayContext())
             {
@@ -79,15 +82,70 @@ namespace BreakAwayConsole
             }
         }
 
-       private static void UpdatePerson()
+        private static void UpdatePerson()
         {
-           using (var context = new BreakAwayContext())
-           {
-               var person = context.People.FirstOrDefault();
-               person.FirstName = "Rowena";
-               context.SaveChanges();
-           }
+            using (var context = new BreakAwayContext())
+            {
+                var person = context.People.FirstOrDefault();
+                person.FirstName = "Rowena";
+                if (person.Photo == null)
+                {
+                    person.Photo = new PersonPhoto { Photo = new Byte[] { 0 } };       
+                }
+                context.SaveChanges();
+            }
         }
-    }
 
+        //private static void DeleteDestinationInMemoryAndDbCascade()
+        //{
+        //    int destinationId;
+        //    using (var context = new BreakAwayContext())
+        //    {
+        //        var destination = new Destination
+        //        {
+        //            Name = "Sample Destination",
+        //            Lodgings = new List<Lodging>
+        //              {
+        //                new Lodging { Name = "Lodging One" },
+        //                new Lodging { Name = "Lodging Two" }
+        //              }
+        //        };
+        //        context.Destinations.Add(destination);
+        //        context.SaveChanges();
+        //        destinationId = destination.DestinationId;
+        //    }
+
+            //using (var context = new BreakAwayContext())
+            //{
+            //    var destination = context.Destinations
+            //        .Include("Lodgings")
+            //        .Single(d => d.DestinationId == destinationId);
+
+            //    var aLodging = destination.Lodgings.FirstOrDefault();
+            //    context.Destinations.Remove(destination);
+
+            //    Console.WriteLine("State of one Lodging: {0}", context.Entry(aLodging).State.ToString());
+
+            //    context.SaveChanges();
+            //}
+
+        //    using (var context = new BreakAwayContext())
+        //    {
+        //        var destination = context.Destinations
+        //          .Single(d => d.DestinationId == destinationId);
+                              
+        //        context.Destinations.Remove(destination);
+        //        context.SaveChanges();
+        //    }
+        //    using (var context = new BreakAwayContext())
+        //    {
+        //        var lodgings = context.Lodgings
+        //          .Where(l => l.DestinationId == destinationId).ToList();
+        //        Console.WriteLine("Lodgings: {0}", lodgings.Count);
+        //    }
+        //}
+
+
+
+    }
 }
